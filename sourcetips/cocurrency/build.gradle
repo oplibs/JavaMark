@@ -1,0 +1,36 @@
+group 'cn.mzen'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'maven'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+
+task runRunable(type: JavaExec) {
+    main = 'cn.mzen.cocurrency.RunableMain'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+task runThread(type: JavaExec) {
+    main = 'cn.mzen.cocurrency.ThreadMain'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+task runVolatile(type: JavaExec) {
+    main = 'cn.mzen.cocurrency.VolatileMain'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+task runNortify(type: JavaExec) {
+    main = 'cn.mzen.cocurrency.NortifyMain'
+    classpath = sourceSets.main.runtimeClasspath
+}

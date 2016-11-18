@@ -1,0 +1,20 @@
+group 'cn.mzen'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'maven'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+task runListmain(type: JavaExec) {
+    main = 'cn.mzen.collection.ListMain'
+    classpath = sourceSets.main.runtimeClasspath
+}
