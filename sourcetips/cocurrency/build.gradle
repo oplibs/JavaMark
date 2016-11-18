@@ -30,7 +30,12 @@ task runVolatile(type: JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
 }
 
-task runNortify(type: JavaExec) {
-    main = 'cn.mzen.cocurrency.NortifyMain'
+task runNotify(type: JavaExec) {
+    main = 'cn.mzen.cocurrency.NotifyMain'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+task runPAC(type: JavaExec) {
+    main = 'cn.mzen.cocurrency.PACMain'
     classpath = sourceSets.main.runtimeClasspath
 }
