@@ -1,20 +1,27 @@
 package cn.mzen.algotips.leetcode.sol;
 
+import java.util.HashMap;
+
 /**
  * Created by itrek on 12/20/16.
  */
 public class Sol001 extends Solution{
-    private static String TAG = "Sol 001";
+    private String TAG = "Sol 001";
     public Sol001(){
-        System.out.println(Sol001.TAG+" inited!");
+        super();
     }
 
     public void run(String args){
-        System.out.println(Sol001.TAG+" run start!");
+        System.out.println(this.TAG+" run start!");
+        String[] params = args.split(";");
+        for(String item: params){
+            System.out.println(item);
+        }
         this.execute();
-        System.out.println(Sol001.TAG+" run end!");
+        System.out.println(this.TAG+" run end!");
     }
     private void execute(){
+        HashMap<Integer, Integer>  valueDict = new HashMap<Integer, Integer>();
         return;
     }
 }

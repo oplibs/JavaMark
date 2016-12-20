@@ -9,7 +9,8 @@ public class LeetCode{
     }
 
     public void callAlgorithm(String[] args) throws ClassNotFoundException, InvocationTargetException, IllegalAccessException {
-        String algoindex = args[0];
+        String[] params = args[0].split(":");
+        String algoindex = params[0];
         String classname = "cn.mzen.algotips.leetcode.sol.Sol"+algoindex;
         Class algoClass = Class.forName(classname);
 
@@ -29,7 +30,8 @@ public class LeetCode{
             argsClass[0] = String.class;
             Method runMethod = algoClass.getDeclaredMethod("run", argsClass);
             runMethod.setAccessible(true);
-            runMethod.invoke(algoObject, args[0]);
+            // runMethod.invoke(algoObject, args[0]);
+            runMethod.invoke(algoObject, params[1]);
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
             return;

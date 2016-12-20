@@ -16,8 +16,8 @@ dependencies {
 }
 
 task runLeet(type: JavaExec) {
-    if ( project.hasProperty("num") ) {
-        args = [project.property("num")]
+    if ( project.hasProperty("args") ) {
+        args = [project.property("args")]
     }
     main = 'cn.mzen.algotips.Main'
     classpath = sourceSets.main.runtimeClasspath
