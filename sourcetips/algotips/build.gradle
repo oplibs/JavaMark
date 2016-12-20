@@ -1,0 +1,24 @@
+group 'cn.mzen'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'maven'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+task runLeet(type: JavaExec) {
+    if ( project.hasProperty("num") ) {
+        args = [project.property("num")]
+    }
+    main = 'cn.mzen.algotips.Main'
+    classpath = sourceSets.main.runtimeClasspath
+}
