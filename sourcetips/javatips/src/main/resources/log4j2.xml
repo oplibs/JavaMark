@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+       <!--自定义属性-->
+       <properties>
+              <property name="LOG_HOME">log</property>
+              <property name="FILE_NAME">demo</property>
+       </properties>
+       <!--输出源-->
+       <Appenders>
+              <!--输出至控制台-->
+              <Console name="Console" target="SYSTEM_OUT">
+                     <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+              </Console>
+              <!--输出至文件-->
+              <File name="logfile" fileName="${LOG_HOME}/test.log">
+                     <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss-SSS} [%t] %-5level %logger{36} - %msg%n"/>
+              </File>
+              <!--输出至RollingFile，filePattern指定文件备份时，文件转移和重命名规则-->
+              <RollingFile name="rollingfile" fileName="${LOG_HOME}/rolling.log" filePattern="${LOG_HOME}/$${date:yyyy-MM}/aap-%d{yyyy-MM-dd}-%i.log.gz">
+                     <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+                     <!--指定触发备份的时间间隔或日志文件的最大值-->
+                     <Policies>
+                            <!--需要和filePattern结合使用，注意filePattern中配置的文件重命名规则是${FILE_NAME}-%d{yyyy-MM-dd-HH-mm}-%i，最小的时间粒度是mm，即分钟，TimeBasedTriggeringPolicy指定的size是1，结合起来就是每1分钟生成一个新文件。如果改成%d{yyyy-MM-dd-HH}，最小粒度为小时，则每一个小时生成一个文件。-->
+                            <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                            <!--日志文件大小超过1MB就会进行压缩备份-->
+                            <SizeBasedTriggeringPolicy size="1MB"/>
+                     </Policies>
+                     <!--一共生成多少个压缩文件，如果超过8个则自动覆盖之前的，文件名编号i指定，避免同一时段产生过多日志-->
+                     <DefaultRolloverStrategy max="8"/>
+              </RollingFile>
+              <!--输出并过滤只包含trace - info信息至infofile-->
+              <RollingFile name="infofile" fileName="${LOG_HOME}/info.log" filePattern="${LOG_HOME}/info/$${date:yyyy-MM-dd}/info-%d{yyyy-MM-dd-HH-mm}-%i.log.gz">
+                     <Filters>
+                            <ThresholdFilter level="warn" onMatch="DENY" onMisMatch="NEUTRAL"/>
+                            <ThresholdFilter level="trace" onMatch="ACCEPT" onMisMatch="DENY"/>
+                     </Filters>
+                     <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+                     <Policies>
+                            <TimeBasedTriggeringPolicy/>
+                            <SizeBasedTriggeringPolicy size="1MB"/>
+                     </Policies>
+                     <DefaultRolloverStrategy max="10"/>
+              </RollingFile>
+              <!--输出并过滤warn - error以上信息至errorfile-->
+              <RollingFile name="errorfile" fileName="${LOG_HOME}/error.log" filePattern="${LOG_HOME}/error/$${date:yyyy-MM-dd}/error-%d{yyyy-MM-dd-HH-mm}-%i.log.gz">
+                     <Filters>
+                            <ThresholdFilter level="fatal" onMatch="DENY" onMisMatch="NEUTRAL"/>
+                            <ThresholdFilter level="warn" onMatch="ACCEPT" onMisMatch="DENY"/>
+                     </Filters>
+                     <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+                     <Policies>
+                            <TimeBasedTriggeringPolicy/>
+                            <SizeBasedTriggeringPolicy size="1MB"/>
+                     </Policies>
+                     <DefaultRolloverStrategy max="10"/>
+              </RollingFile>
+              <!--输出并过滤fatal信息至fatalfile-->
+              <RollingFile name="fatalfile" fileName="${LOG_HOME}/fatal.log" filePattern="${LOG_HOME}/fatal/$${date:yyyy-MM}/tatal-%d{yyyy-MM-dd-HH-mm}-%i.log.gz">
+                     <Filters>
+                            <ThresholdFilter level="fatal" onMatch="ACCEPT" onMisMatch="DENY"/>
+                     </Filters>
+                     <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+                     <Policies>
+                            <TimeBasedTriggeringPolicy/>
+                            <SizeBasedTriggeringPolicy size="1KB"/>
+                     </Policies>
+                     <DefaultRolloverStrategy max="10"/>
+              </RollingFile>
+       </Appenders>
+       <!--日志类型-->
+       <Loggers>
+              <!--根logger-->
+              <Root level="trace">
+                     <AppenderRef ref="Console" />
+              </Root>
+
+              <!--包logger: name机制根据最长匹配度进行-->
+              <Logger name="site.zhangchuzhao.demo" level="info" additivity="false">
+                     <AppenderRef ref="Console"/>
+              </Logger>
+
+              <!--类logger:注意大小写-->
+              <Logger name="site.zhangchuzhao.demo.Bar" level="trace" additivity="false">
+                     <AppenderRef ref="Console"/>
+              </Logger>
+              <!--类logger-->
+              <Logger name="site.zhangchuzhao.demo.Test" level="info" additivity="false">
+                     <AppenderRef ref="Console"/>
+              </Logger>
+
+              <!--自定义name logger-->
+              <Logger name="test" level="trace" additivity="true">
+                     <!--<AppenderRef ref="logfile"/>-->
+                     <!--<AppenderRef ref="rollingfile"/>-->
+                     <AppenderRef ref="infofile"/>
+                     <AppenderRef ref="errorfile"/>
+                     <AppenderRef ref="fatalfile"/>
+              </Logger>
+       </Loggers>
+</Configuration>
