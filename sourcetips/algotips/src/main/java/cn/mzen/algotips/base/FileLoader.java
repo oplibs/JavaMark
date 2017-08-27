@@ -40,7 +40,7 @@ public class FileLoader{
         try {
             this.fr = new FileReader(filename);
             this.br=new BufferedReader(this.fr);
-            System.out.println("Case file load successfully!");
+            // System.out.println("Case file load successfully!");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             return false;

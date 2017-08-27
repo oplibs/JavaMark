@@ -2,6 +2,9 @@ package cn.mzen.algotips.leetcode.sol;
 
 import cn.mzen.algotips.base.*;
 
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+
 // import java.io.StringReader;
 // import java.util.ArrayList;
 // import java.util.HashMap;
@@ -11,7 +14,9 @@ import java.util.List;
  * Created by itrek on 12/20/16.
  */
 public class Sol001 extends Solution{
-    private String TAG = "Sol 001";
+    private static Logger logger = LogManager.getLogger(Sol001.class.getName());
+    private static String TAG = "Sol 001";
+
     public Sol001(){
         super();
     }
@@ -30,7 +35,8 @@ public class Sol001 extends Solution{
     }
 
     private void execute(Integer target, List list){
-        System.out.println("Test satrt: "+target);
+        // System.out.println("Test satrt: "+target);
+        logger.info("Test satrt: "+target);
         /*
         HashMap<Integer, Integer>  valueDict = new HashMap<Integer, Integer>();
         return;

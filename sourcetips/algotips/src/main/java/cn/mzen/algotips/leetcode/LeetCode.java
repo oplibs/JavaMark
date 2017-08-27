@@ -1,9 +1,13 @@
 package cn.mzen.algotips.leetcode;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.lang.reflect.*;
 /**
  * Created by itrek on 11/18/16.
  */
 public class LeetCode{
+    private static Logger logger = LogManager.getLogger(LeetCode.class.getName());
     public LeetCode(){
 
     }
@@ -30,13 +34,10 @@ public class LeetCode{
             argsClass[0] = String.class;
             Method runMethod = algoClass.getDeclaredMethod("run", argsClass);
             runMethod.setAccessible(true);
-            // runMethod.invoke(algoObject, args[0]);
-            System.out.println("file");
-            System.out.println(params[1]);
             runMethod.invoke(algoObject, params[1]);
         } catch (NoSuchMethodException e) {
-            System.out.println("here");
             e.printStackTrace();
+            logger.error("Class init failed!");
             return;
         }
     }
