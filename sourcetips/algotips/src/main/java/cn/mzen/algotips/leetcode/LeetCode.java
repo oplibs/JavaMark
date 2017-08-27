@@ -31,8 +31,11 @@ public class LeetCode{
             Method runMethod = algoClass.getDeclaredMethod("run", argsClass);
             runMethod.setAccessible(true);
             // runMethod.invoke(algoObject, args[0]);
+            System.out.println("file");
+            System.out.println(params[1]);
             runMethod.invoke(algoObject, params[1]);
         } catch (NoSuchMethodException e) {
+            System.out.println("here");
             e.printStackTrace();
             return;
         }

@@ -14,7 +14,7 @@ public class Main {
             leetCode.callAlgorithm(args);
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-            System.out.println("Could not find the calss");
+            System.out.println("Could not find the class");
         } catch (InvocationTargetException e) {
             e.printStackTrace();
             System.out.println("Could not call the function");
