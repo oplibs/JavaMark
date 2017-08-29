@@ -13,3 +13,11 @@ hs_err_pid*
 
 .idea
 .gradle
+
+# tex
+.DS_Store
+*.aux
+*.pdf
+*.log
+*.out
+*.dvi
