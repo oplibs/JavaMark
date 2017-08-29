@@ -31,15 +31,10 @@ public class Sol001 extends Solution{
         Integer target = Integer.parseInt(params[0]);
         List list = FileLoader.getIntegerArray(params[1]);
 
-        this.execute(target, list);
+        //this.execute(list, target);
     }
 
-    private void execute(Integer target, List list){
-        // System.out.println("Test satrt: "+target);
-        logger.info("Test satrt: "+target);
-        /*
-        HashMap<Integer, Integer>  valueDict = new HashMap<Integer, Integer>();
-        return;
-        */
+    private void execute(int[] nums, int target){
+        //private void execute(int[] nums, int target){
     }
 }
