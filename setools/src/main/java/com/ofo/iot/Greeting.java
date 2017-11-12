@@ -1,4 +1,4 @@
-package hello;
+package com.ofo.iot;
 
 public class Greeting {
 
